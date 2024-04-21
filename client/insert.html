@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        ID: <input type="number" id="sid"> <br>
+        Name: <input type="text" id="sname"> <br>
+        Dept: <input type="text" id="dept"> <br>
+        Year: <input type="number" id="year"> <br>
+        CGPA: <input type="number" id="cgpa"> <br>
+        <input type="button" value="insert" id="insert">
+    </form>
+    <p id="res"></p>
+    <script>
+        const sid = document.getElementById('sid');
+        const sname = document.getElementById('sname');
+        const dept = document.getElementById('dept');
+        const year = document.getElementById('year');
+        const cgpa = document.getElementById('cgpa');
+        const insert = document.getElementById('insert');
+        const result = document.getElementById('res');
+        console.log('script loaded')
+        insert.addEventListener('click',()=>{
+            var data = {
+                sid: parseInt(sid.value),
+                sname: sname.value,
+                dept: dept.value,
+                year: parseInt(year.value),
+                cgpa: parseFloat(cgpa.value),
+            }
+            console.log('post data');
+            fetch('http://localhost:9000/api/students',{
+                method: "POST",
+                headers: {
+                        'Content-type': 'application/json; charset=UTF-8'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(res => {return res.json()})
+            .then(res => {console.log(res)});
+        })
+</script>
+</body>
+</html>

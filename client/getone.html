@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <input type="text" name="" id="rno">
+        <input type="button" value="getone" id="getone">
+    </form>
+    <p id="res"></p>
+    <script>
+        const rno = document.getElementById('rno')
+        const getone = document.getElementById('getone');
+        const result = document.getElementById('res');
+
+        getone.addEventListener('click',()=>{
+        fetch(`http://localhost:9000/api/students/${rno.value}`)
+        .then(res => {return res.json()})
+        .then(res => {result.innerText = JSON.stringify(res)});
+        })
+</script>
+</body>
+</html>
